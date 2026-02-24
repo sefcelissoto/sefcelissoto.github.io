@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Sef Celis-Soto</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Bellefair&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============ RESET ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink-blue: #1b2330;
+      --ink-blue-soft: #2a3442;
+      --cream: #f7f2e8;
+      --cream-deep: #e6d8c2;
+      --gold-soft: #c5a676;
+      --page-bg: rgba(247,242,232,0.92);
+      --corner-blue: #6f87a6;
+    }
+
+    /* ===== BODY / PAGE ===== */
+    body {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--ink-blue);
+      background: #f3ede4;
+      background-image: url("https://i.pinimg.com/originals/22/93/ed/2293ed602af37203c07a2739d353d5ed.gif");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 52px 40px;
+      background: var(--page-bg);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      position: relative;
+    }
+
+    /* ===== CORNER ORNAMENTS ===== */
+    .corner {
+      position: absolute;
+      width: 140px;
+      opacity: 0.85;
+      pointer-events: none;
+      filter:
+        brightness(0.55)
+        contrast(1.35)
+        saturate(1.4)
+        drop-shadow(0 0 6px rgba(40, 60, 90, 0.35))
+        drop-shadow(0 0 10px rgba(40, 60, 90, 0.25));
+    }
+    .corner-tl { top: 18px; left: 18px; }
+    .corner-tr { top: 18px; right: 18px; transform: scaleX(-1); }
+    .corner-bl { bottom: 18px; left: 18px; }
+    .corner-br { bottom: 18px; right: 18px; }
+
+    /* ===== NAV + LOGO ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      border-bottom: 4px double var(--gold-soft);
+      padding-bottom: 20px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--ink-blue);
+      text-decoration: none;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: 0.25s ease;
+      font-weight: 500;
+    }
+
+    .nav a::after {
+      content: "";
+      width: 0;
+      height: 1px;
+      background: var(--gold-soft);
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      transition: 0.25s ease;
+    }
+
+    .nav a:hover {
+      color: var(--gold-soft);
+      text-shadow: 0 0 6px rgba(197,166,118,0.35);
+    }
+
+    .nav a:hover::after { width: 100%; }
+
+    .active-link { color: var(--gold-soft); }
+
+    .logo {
+      width: 230px;
+      transition: 0.3s ease;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.18));
+    }
+
+    .logo:hover {
+      transform: scale(1.03);
+      filter: drop-shadow(0 0 18px rgba(250,244,235,0.55));
+    }
+
+    /* ===== TAGLINE ===== */
+    .tagline {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--ink-blue-soft);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* ========= SECTION HEADING ========= */
+    .section-heading {
+      font-family: "Bellefair", serif;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--ink-blue);
+      letter-spacing: 0.04em;
+    }
+
+    /* ========= BIO SECTION ========= */
+    .bio-section {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 60px;
+      align-items: flex-start;
+    }
+
+    .bio-text {
+      flex: 1;
+      font-size: 18px;
+      color: var(--ink-blue-soft);
+      line-height: 1.75;
+      text-shadow: 1px 1px 3px rgba(180,180,180,0.35);
+    }
+
+    .bio-text p + p { margin-top: 12px; }
+
+    .bio-photo img {
+      width: 270px;
+      border-radius: 150px 150px 0 0;
+      border: 3px solid var(--corner-blue);
+      object-fit: cover;
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.25),
+        0 0 16px rgba(111,135,166,0.45);
+    }
+
+    /* ========= RESUME ========= */
+    .resume-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .resume-text {
+      max-width: 600px;
+      margin: 0 auto 14px;
+      color: var(--ink-blue-soft);
+      font-size: 17px;
+    }
+
+    .resume-btn {
+      display: inline-block;
+      padding: 10px 28px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--ink-blue);
+      border-radius: 999px;
+      color: var(--ink-blue);
+      letter-spacing: 0.16em;
+      font-size: 13px;
+      text-decoration: none;
+      transition: 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-btn:hover {
+      background: var(--ink-blue);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Resume shimmer overlay */
+    .resume-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      opacity: 0;
+      transform: skewX(-20deg);
+    }
+
+    .resume-btn.shimmer-on::after {
+      animation: smoothShimmer 4s ease-in-out infinite;
+    }
+
+    /* ========= ANIMATED DIVIDER ========= */
+    .animated-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 40px 0;
+    }
+
+    .ad-line {
+      width: 180px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+      opacity: 1;
+    }
+
+    .ad-symbol {
+      font-size: 20px;
+      color: var(--gold-soft);
+      opacity: 1;
+    }
+
+    /* ========= SKILLS ========= */
+    .skills-clean { margin: 40px 0 70px; }
+
+    .skills-clean-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .skills-clean-box {
+      background: rgba(255,255,255,0.85);
+      padding: 26px;
+      border-radius: 14px;
+      border: 1px solid rgba(111,135,166,0.5);
+      transition: 0.4s ease;
+    }
+
+    .skills-clean-box:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 14px 32px rgba(0,0,0,0.2),
+        0 0 16px rgba(111,135,166,0.4);
+    }
+
+    .skills-clean-box ul { list-style: none; }
+
+    .skills-clean-box li {
+      padding-left: 26px;
+      margin-bottom: 10px;
+      font-size: 17px;
+      color: var(--ink-blue-soft);
+      position: relative;
+    }
+
+    .skills-clean-box li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--corner-blue);
+    }
+
+    /* ========= BADGES ========= */
+    .badges-section {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 10px 0;
+    }
+
+    .badge-img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.35s ease;
+      border: 1px solid rgba(111,135,166,0.4);
+    }
+
+    .badge-img:hover {
+      transform: scale(1.08);
+      box-shadow:
+        0 12px 26px rgba(0,0,0,0.25),
+        0 0 14px rgba(111,135,166,0.5);
+    }
+
+    .badges-text {
+      max-width: 620px;
+      margin: 18px auto 0;
+      font-size: 16px;
+      color: var(--ink-blue-soft);
+    }
+
+    /* ========= WHY HIRE ME (FANCY) ========= */
+    .hire-section { margin-top: 40px; }
+
+    .hire-box {
+      position: relative;
+      background: rgba(255,255,255,0.92);
+      padding: 70px 40px 60px;
+      border-radius: 22px;
+      border: 2px solid rgba(111,135,166,0.45);
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+      overflow: hidden;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.18),
+        inset 0 0 18px rgba(255,255,255,0.4);
+      transition: 0.3s ease;
+    }
+
+    .hire-box:hover { transform: translateY(-4px); }
+
+    .hire-box h2 {
+      font-family: "Bellefair", serif;
+      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+      line-height: 1.25;
+      margin-top: 10px;
+      margin-bottom: 36px;
+      color: #2a2f45;
+      letter-spacing: 0.02em;
+    }
+
+    .hire-box p {
+      max-width: 680px;
+      margin: 0 auto 22px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #4a4f66;
+    }
+    .hire-box p:last-child { margin-bottom: 0; }
+
+    /* MAIN SHIMMER STRIP */
+    .hire-box.fancy::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
+      opacity: 0;
+      transform: skewX(-20deg);
+    }
+
+    .hire-box.fancy.shimmer-on::before {
+      animation: smoothShimmer 5s ease-in-out infinite;
+    }
+
+    @keyframes smoothShimmer {
+      0% { left: -120%; opacity: 0; }
+      20% { opacity: 0.7; }
+      50% { left: 120%; opacity: 0.3; }
+      80% { opacity: 0; }
+      100% { left: 120%; opacity: 0; }
+    }
+
+    /* FLOATING ORBS */
+    .orb {
+      position: absolute;
+      font-size: 18px;
+      color: rgba(197,166,118,0.85);
+      animation: floatOrb 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .orb1 { top: 18px; left: 20px; animation-delay: 0s; }
+    .orb2 { top: 18px; right: 20px; animation-delay: 1s; }
+    .orb3 { bottom: 18px; left: 20%; animation-delay: 2s; }
+    .orb4 { bottom: 18px; right: 20%; animation-delay: 3s; }
+
+    .tiny-star {
+      font-size: 14px;
+      opacity: 0.9;
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.25); }
+    }
+
+    .ts1 { top: 40px; left: 120px; animation-delay: 0.2s; }
+    .ts2 { top: 60px; right: 140px; animation-delay: 0.8s; }
+    .ts3 { bottom: 80px; left: 180px; animation-delay: 1.4s; }
+    .ts4 { bottom: 50px; right: 110px; animation-delay: 2s; }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-bottom: 40px;
+    }
+
+    .footer-logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .footer-logo {
+      width: 90px;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 6px rgba(60,80,100,0.35));
+      transition: 0.3s ease;
+    }
+
+    .footer-logo:hover {
+      transform: scale(1.04);
+      filter: drop-shadow(0 0 10px rgba(110,130,160,0.5));
+    }
+
+    .copy {
+      font-size: 14px;
+      color: var(--ink-blue-soft);
+      margin-bottom: 8px;
+    }
+
+    .footer-nav a {
+      color: var(--ink-blue);
+      text-decoration: none;
+      margin: 0 6px;
+      font-size: 15px;
+    }
+
+    .footer-nav a:hover { color: var(--gold-soft); }
+
+    .divider-dot {
+      opacity: 0.4;
+      font-size: 18px;
+      color: var(--ink-blue);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .page { padding: 32px 24px; }
+      .nav { flex-direction: column; gap: 16px; }
+      .bio-section { flex-direction: column; align-items: center; }
+      .bio-photo img { width: 240px; }
+      .badges-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 28px 16px 30px; }
+      .skills-clean-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- CORNERS -->
+    <img src="https://i.ibb.co/k6yjnS0Q/Chat-GPT-Image-Dec-4-2025-01-40-48-PM.png" class="corner corner-tl" alt="">
+    <img src="https://i.ibb.co/k6yjnS0Q/Chat-GPT-Image-Dec-4-2025-01-40-48-PM.png" class="corner corner-tr" alt="">
+    <img src="https://i.ibb.co/MybSwCj2/tehe-4.png" class="corner corner-bl" alt="">
+    <img src="https://i.ibb.co/Q7nPDRKT/tehe-3.png" class="corner corner-br" alt="">
+
+    <!-- NAV + LOGO -->
+    <header class="header">
+      <nav class="nav">
+        <div class="nav-left">
+          <a href="index.html">Home</a>
+          <a href="about.html" class="active-link">About</a>
+        </div>
+
+        <img
+          src="https://i.ibb.co/J4by1kh/Chat-GPT-Image-Dec-3-2025-12-41-30-PM.png"
+          class="logo"
+          alt="logo"
+        >
+
+        <div class="nav-right">
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+
+      <p class="tagline">Aesthetic Over Function But Nonetheless with Intention</p>
+    </header>
+
+    <!-- BIO -->
+    <section class="bio-section">
+      <div class="bio-text">
+        <h2 class="section-heading">⋆.˚✮ Profreshional Biography ✮˚.⋆</h2>
+
+        <p>Hey, I’m Sef. I’m someone who learns quickly, adapts easily, and puts my whole heart into the things I care about. Every experience big or small has shaped who I am, and I’m proud of the growth that’s come with it. I’m especially passionate about technology, particularly anything involving maps, spatial data, and databases. There’s something exciting about exploring new tools and challenges, and I love approaching them with curiosity and confidence.</p>
+
+        <p>Before stepping into tech, I worked as a manager at a coffee shop, where I supervised and trained more than 30 employees. That role taught me so much about leadership, communication, and staying grounded under pressure. I learned how to support others, create smoother workflows, and make sure every customer felt taken care of. Those skills still guide how I show up today in teamwork, in problem-solving, and in the way I value people.</p>
+
+        <p>Through my work as a Website Development Trainee at Hopeworks, I’ve gained hands-on experience with HTML, CSS, JavaScript, content organization, user experience, and collaborating with a team to solve both creative and technical problems. Those moments figuring things out together, improving a project piece by piece have shown me how much I enjoy building things that truly help people.</p>
+      </div>
+
+      <div class="bio-photo">
+        <img src="https://i.ibb.co/1tcxVwJx/hot.jpg" alt="Headshot of Sef">
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section class="resume-section">
+      <h2 class="section-heading">⟡ Resume ⟡</h2>
+      <p class="resume-text">You can view my Complete resume here!</p>
+
+      <a
+        href="https://i.ibb.co/60dN99VJ/Sef-Celis-Soto-Resueme25-2.png"
+        class="resume-btn shimmer-on"
+        target="_blank"
+        rel="noopener"
+      >
+        View Full Resume ⤤
+      </a>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="animated-divider">
+      <span class="ad-line ad-line-left"></span>
+      <span class="ad-symbol">⋆༺𓆩☠︎︎𓆪༻⋆</span>
+      <span class="ad-line ad-line-right"></span>
+    </div>
+
+    <!-- SKILLS -->
+    <section class="skills-clean">
+      <h2 class="section-heading">˖✩ Skills ˖✩ ݁˖</h2>
+
+      <div class="skills-clean-grid">
+        <div class="skills-clean-box">
+          <h3>Hard Skills</h3>
+          <ul>
+            <li>HTML &amp; CSS</li>
+            <li>Basic JavaScript</li>
+            <li>WordPress</li>
+            <li>Figma</li>
+            <li>Responsive Web Design</li>
+            <li>Using browser Developer Tools</li>
+            <li>Python (Beginner)</li>
+            <li>Following technical documentation</li>
+          </ul>
+        </div>
+
+        <div class="skills-clean-box">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Resilient</li>
+            <li>Communication</li>
+            <li>Adaptability</li>
+            <li>Self Reliant</li>
+            <li>Attention to Detail</li>
+            <li>Conflict Resolution</li>
+            <li>Self-Motivation</li>
+            <li>Empathy &amp; Patience</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section class="badges-section">
+      <h2 class="section-heading">Google Workspace Badges</h2>
+
+      <div class="badges-grid">
+        <img src="https://cdn.qwiklabs.com/isO87oF8NuGd%2BEUrcln4SJD987sC7BlhY93ZIujzKCs%3D" class="badge-img" alt="Google badge 1">
+        <img src="https://cdn.qwiklabs.com/StWwkiCtfWKEggV%2F9S71aTMNDawKTo1O53jB8KoZjNU%3D" class="badge-img" alt="Google badge 2">
+        <img src="https://cdn.qwiklabs.com/%2FtYhYIsUSq9IiI8cxFfQ7R88tHLcwMuW31aPWx8C3ig%3D" class="badge-img" alt="Google badge 3">
+        <img src="https://images.squarespace-cdn.com/content/v1/5771e52c9de4bbb95cf291eb/bc598097-1ca0-4e23-840f-209f4f913ab2/Google-gmail.png" class="badge-img" alt="Google Gmail badge">
+      </div>
+
+      <p class="badges-text">These badges highlight my verified Google Workspace skills.</p>
+    </section>
+
+    <!-- WHY HIRE ME -->
+    <section class="hire-section" id="hire-me">
+      <div class="hire-box fancy shimmer-on">
+
+        <!-- ORBS -->
+        <span class="orb orb1">✩</span>
+        <span class="orb orb2">⭑</span>
+        <span class="orb orb3">✰</span>
+        <span class="orb orb4">⭑</span>
+
+        <!-- TINY STARS -->
+        <span class="orb tiny-star ts1">✦</span>
+        <span class="orb tiny-star ts2">✧</span>
+        <span class="orb tiny-star ts3">✦</span>
+        <span class="orb tiny-star ts4">✧</span>
+
+        <div class="hire-ornament">𔘓</div>
+
+        <h2 class="hire-title">Why Employers Should Hire Me</h2>
+
+        <p class="hire-text">
+          You should hire me because I’m adaptable, motivated, bilingual, and committed to delivering my best for the team I join.
+          I learn new tools quickly, look for ways to improve workflows, and support a positive work environment.
+        </p>
+
+        <p class="hire-text">
+          I step up when needed and bring both technical skills and real leadership experience. With my background in web development,
+          customer service, and managing fast paced teams, I know how to communicate clearly, solve problems under pressure, and stay focused on quality.
+          I’m dedicated to growth, open to feedback, and ready to show up with consistency, initiative, and a people first mindset.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-logo-container">
+        <img
+          src="https://i.ibb.co/J4by1kh/Chat-GPT-Image-Dec-3-2025-12-41-30-PM.png"
+          class="footer-logo"
+          alt="Footer Logo"
+        >
+      </div>
+
+      <p class="copy">©2025 Sef Celis–Soto ⏾ We can be as we are.</p>
+
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="about.html" class="active-link">About</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="portfolio.html">Portfolio</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </footer>
+
+  </div>
+</body>
+</html>
