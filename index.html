@@ -11,19 +11,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Bellefair&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ============ RESET ============ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --ink-blue: #1b2330;
       --ink-blue-soft: #2a3442;
+      --cream: #f7f2e8;
+      --cream-deep: #e6d8c2;
       --gold-soft: #c5a676;
       --page-bg: rgba(247,242,232,0.92);
+      --corner-blue: #6f87a6;
     }
 
+    /* ===== BODY / PAGE ===== */
     body {
       font-family: "Cormorant Garamond", serif;
       color: var(--ink-blue);
@@ -40,11 +41,13 @@
       margin: 0 auto;
       padding: 48px 52px 40px;
       background: var(--page-bg);
+      backdrop-filter: blur(4px);
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
       position: relative;
     }
 
+    /* ===== CORNER ORNAMENTS ===== */
     .corner {
       position: absolute;
       width: 140px;
@@ -54,7 +57,8 @@
         brightness(0.55)
         contrast(1.35)
         saturate(1.4)
-        drop-shadow(0 0 6px rgba(40, 60, 90, 0.35));
+        drop-shadow(0 0 6px rgba(40, 60, 90, 0.35))
+        drop-shadow(0 0 10px rgba(40, 60, 90, 0.25));
     }
 
     .corner-tl { top: 18px; left: 18px; }
@@ -62,6 +66,7 @@
     .corner-bl { bottom: 18px; left: 18px; }
     .corner-br { bottom: 18px; right: 18px; }
 
+    /* ===== NAV + LOGO ===== */
     .header {
       text-align: center;
       margin-bottom: 50px;
@@ -76,8 +81,7 @@
       gap: 40px;
     }
 
-    .nav-left,
-    .nav-right {
+    .nav-left, .nav-right {
       display: flex;
       gap: 24px;
     }
@@ -87,22 +91,43 @@
       text-decoration: none;
       font-size: 20px;
       letter-spacing: 0.05em;
+      position: relative;
       transition: 0.25s ease;
       font-weight: 500;
     }
 
-    .nav a:hover {
-      color: var(--gold-soft);
+    .nav a::after {
+      content: "";
+      width: 0;
+      height: 1px;
+      background: var(--gold-soft);
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      transition: 0.25s ease;
     }
 
-    .active-link {
+    .nav a:hover {
       color: var(--gold-soft);
+      text-shadow: 0 0 6px rgba(197,166,118,0.35);
     }
+
+    .nav a:hover::after { width: 100%; }
+
+    .active-link { color: var(--gold-soft); }
 
     .logo {
       width: 230px;
+      transition: 0.3s ease;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.18));
     }
 
+    .logo:hover {
+      transform: scale(1.03);
+      filter: drop-shadow(0 0 18px rgba(250,244,235,0.55));
+    }
+
+    /* ===== TAGLINE ===== */
     .tagline {
       margin-top: 14px;
       font-size: 14px;
@@ -111,10 +136,19 @@
       text-transform: uppercase;
     }
 
+    /* ===== HERO SECTION ===== */
     .hero {
       text-align: center;
       max-width: 780px;
       margin: 60px auto 70px;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-blue-soft);
+      margin-bottom: 6px;
     }
 
     .hero-name {
@@ -122,6 +156,7 @@
       font-size: 40px;
       letter-spacing: 0.08em;
       margin-bottom: 6px;
+      color: var(--ink-blue);
     }
 
     .hero-title {
@@ -147,6 +182,7 @@
     }
 
     .hero-btn {
+      display: inline-block;
       padding: 8px 22px;
       border-radius: 999px;
       font-size: 13px;
@@ -157,25 +193,50 @@
       transition: 0.25s ease;
     }
 
-    .primary-btn {
-      background: var(--ink-blue);
-      color: #fdfdf7;
-    }
-
+    .primary-btn { background: var(--ink-blue); color: #fdfdf7; }
     .primary-btn:hover {
       background: transparent;
       color: var(--ink-blue);
+      box-shadow: 0 0 10px rgba(41,51,66,0.5);
     }
 
-    .featured-work {
-      text-align: center;
-      margin: 40px 0 80px;
+    .secondary-btn { background: transparent; color: var(--ink-blue); }
+    .secondary-btn:hover {
+      background: rgba(247,242,232,0.96);
+      box-shadow: 0 0 8px rgba(197,166,118,0.4);
     }
+
+    /* ===== DOVE DIVIDER ===== */
+    .ornamental-divider {
+      margin: 35px auto 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .orn-line {
+      flex: 0 0 140px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,166,118,0.9), transparent);
+    }
+
+    .orn-dove { font-size: 18px; color: var(--ink-blue-soft); }
+
+    /* ===== FEATURED WORK (GOTHIC ARCH) ===== */
+    .featured-work { text-align: center; margin: 40px 0 80px; }
 
     .section-heading {
       font-family: "Bellefair", serif;
       font-size: 28px;
+      color: var(--ink-blue);
       margin-bottom: 10px;
+    }
+
+    .featured-subtext {
+      font-size: 16px;
+      color: var(--ink-blue-soft);
+      margin-bottom: 40px;
     }
 
     .featured-grid {
@@ -185,13 +246,18 @@
       justify-items: center;
     }
 
+    .project-card { text-align: center; }
+
     .arch-shape {
       width: 220px;
       height: 260px;
       background: rgba(255,255,255,0.8);
+      border: 2px solid rgba(111,135,166,0.45);
       border-radius: 120px 120px 0 0;
       padding: 10px;
       overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15), 0 0 16px rgba(111,135,166,0.35);
+      transition: 0.35s ease;
     }
 
     .arch-shape img {
@@ -201,21 +267,77 @@
       border-radius: 110px 110px 0 0;
     }
 
+    .project-card:hover .arch-shape {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 36px rgba(0,0,0,0.22), 0 0 22px rgba(111,135,166,0.6);
+      border-color: rgba(111,135,166,0.9);
+    }
+
     .project-title {
       margin-top: 14px;
       font-size: 18px;
       font-family: "Bellefair", serif;
+      color: var(--ink-blue);
     }
 
     .project-link {
       display: inline-block;
       margin-top: 4px;
       font-size: 14px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--gold-soft);
+      transition: 0.25s ease;
     }
 
+    .project-link:hover {
+      color: var(--ink-blue);
+      text-shadow: 0 0 8px rgba(111,135,166,0.5);
+    }
+
+    /* ===== CHAOTIC QUOTE SECTION ===== */
+    .quote-chaos { margin: 40px 0 20px; }
+
+    .quote-frame {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 26px;
+      border-radius: 20px;
+      border: 1px solid rgba(197,166,118,0.8);
+      background: radial-gradient(circle at 10% 0%, rgba(232,217,166,0.18), transparent 55%),
+                  rgba(247,242,232,0.96);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22), 0 0 22px rgba(197,166,118,0.45);
+    }
+
+    .quote-lines {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .quote-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,166,118,0.9), transparent);
+    }
+
+    .quote-icon {
+      font-size: 18px;
+      color: var(--gold-soft);
+      text-shadow: 0 0 8px rgba(197,166,118,0.7);
+    }
+
+    .quote-text {
+      text-align: center;
+      font-size: 16px;
+      color: var(--ink-blue-soft);
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
     .footer {
       text-align: center;
       margin-top: 70px;
@@ -223,89 +345,192 @@
       padding-bottom: 40px;
     }
 
-    .copy {
-      font-size: 15px;
-      color: var(--ink-blue-soft);
-      margin-bottom: 10px;
+    .footer-logo-container { display: flex; justify-content: center; margin-bottom: 14px; }
+
+    .footer-logo {
+      width: 90px;
+      opacity: 0.9;
+      filter: brightness(0.85) saturate(1.2) drop-shadow(0 0 6px rgba(60,80,100,0.35));
+      transition: 0.3s ease;
     }
 
+    .footer-logo:hover {
+      transform: scale(1.04);
+      filter: brightness(1) drop-shadow(0 0 10px rgba(110,130,160,0.5));
+    }
+
+    .copy { font-size: 15px; color: var(--ink-blue-soft); margin-bottom: 10px; }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-nav a {
+      color: var(--ink-blue);
+      text-decoration: none;
+      font-size: 17px;
+      letter-spacing: 0.04em;
+      font-family: "Bellefair", serif;
+      transition: 0.25s ease;
+    }
+
+    .footer-nav a:hover {
+      color: var(--gold-soft);
+      text-shadow: 0 0 8px rgba(197,166,118,0.5);
+      transform: translateY(-2px);
+    }
+
+    .divider-dot {
+      opacity: 0.4;
+      font-size: 18px;
+      color: var(--ink-blue);
+    }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .featured-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
+      .page { padding: 32px 24px; }
+      .nav { flex-direction: column; gap: 16px; }
+      .featured-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .corner { width: 110px; }
     }
 
     @media (max-width: 600px) {
-      .featured-grid {
-        grid-template-columns: 1fr;
-      }
+      .page { padding: 28px 16px 30px; }
+      .hero-name { font-size: 32px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .quote-frame { border-radius: 16px; padding-inline: 18px; }
+      .footer-nav { flex-wrap: wrap; row-gap: 4px; }
     }
   </style>
 </head>
 
 <body>
   <div class="page">
-
+    <!-- CORNERS -->
     <img src="https://i.ibb.co/k6yjnS0Q/Chat-GPT-Image-Dec-4-2025-01-40-48-PM.png" class="corner corner-tl" alt="">
     <img src="https://i.ibb.co/k6yjnS0Q/Chat-GPT-Image-Dec-4-2025-01-40-48-PM.png" class="corner corner-tr" alt="">
     <img src="https://i.ibb.co/MybSwCj2/tehe-4.png" class="corner corner-bl" alt="">
     <img src="https://i.ibb.co/Q7nPDRKT/tehe-3.png" class="corner corner-br" alt="">
 
+    <!-- NAV + LOGO -->
     <header class="header">
       <nav class="nav">
         <div class="nav-left">
-          <a href="#">Home</a>
-          <a href="#">About</a>
+          <a href="https://codepen.io/Sef-Celis-Soto/full/MYyEqGz" class="active-link">Home</a>
+          <a href="https://codepen.io/Sef-Celis-Soto/full/ByKJVvV">About</a>
         </div>
 
-        <img src="https://i.ibb.co/J4by1kh/Chat-GPT-Image-Dec-3-2025-12-41-30-PM.png" class="logo" alt="logo">
+        <img
+          src="https://i.ibb.co/J4by1kh/Chat-GPT-Image-Dec-3-2025-12-41-30-PM.png"
+          class="logo"
+          alt="logo"
+        >
 
         <div class="nav-right">
-          <a href="#">Portfolio</a>
-          <a href="#">Contact</a>
+          <a href="https://codepen.io/Sef-Celis-Soto/full/LENmxYE">Portfolio</a>
+          <a href="https://codepen.io/Sef-Celis-Soto/full/OPNZWJg">Contact</a>
         </div>
       </nav>
 
       <p class="tagline">Aesthetic Over Function But Nonetheless with Intention</p>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
+      <p class="hero-eyebrow">Portfolio of</p>
       <h1 class="hero-name">⋆Sef Celis-Soto⋆</h1>
-      <p class="hero-title">Web Developer & GIS Learner</p>
-      <p class="hero-text">Welcome, Dive in take a look.</p>
+      <p class="hero-title">Web Developer &amp; GIS Learner</p>
+
+      <p class="hero-text">
+        Welcome, Dive in take a look.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://codepen.io/Sef-Celis-Soto/full/LENmxYE" class="hero-btn primary-btn">View Featured Work</a>
+        <a href="https://codepen.io/Sef-Celis-Soto/full/ByKJVvV" class="hero-btn secondary-btn">More About Me</a>
+      </div>
     </section>
 
-    <section class="featured-work">
+    <!-- DIVIDER -->
+    <div class="ornamental-divider">
+      <span class="orn-line"></span>
+      <span class="orn-dove">⋆˖⁺‧₊☽◯☾₊‧⁺˖⋆</span>
+      <span class="orn-line"></span>
+    </div>
+
+    <!-- FEATURED WORK -->
+    <section class="featured-work" id="featured">
       <h2 class="section-heading">Featured Work</h2>
+      <p class="featured-subtext">
+        A small collection of pieces where I practice layout, structure, and intentional chaos.
+      </p>
 
       <div class="featured-grid">
         <article class="project-card">
           <div class="arch-shape">
-            <img src="https://i.postimg.cc/SsMZG8zJ/Screenshot-2025-11-24-130829.png">
+            <img src="https://i.postimg.cc/SsMZG8zJ/Screenshot-2025-11-24-130829.png" alt="Homepage Concept">
           </div>
           <h3 class="project-title">Personal Website</h3>
+          <a href="https://codepen.io/Sef-Celis-Soto/full/ogboPrQ" class="project-link">View Project →</a>
         </article>
 
         <article class="project-card">
           <div class="arch-shape">
-            <img src="https://i.ibb.co/rKBXqxQt/Screenshot-2025-12-07-144917.png">
+            <img src="https://i.ibb.co/rKBXqxQt/Screenshot-2025-12-07-144917.png" alt="About Page Design">
           </div>
           <h3 class="project-title">Word Press</h3>
+          <a href="https://sefcelissoto.wordpress.com/" class="project-link">View Project →</a>
         </article>
 
         <article class="project-card">
           <div class="arch-shape">
-            <img src="https://i.ibb.co/ZzpX1kLt/Screenshot-2025-12-07-145338.png">
+            <img src="https://i.ibb.co/ZzpX1kLt/Screenshot-2025-12-07-145338.png" alt="Portfolio Experiments">
           </div>
           <h3 class="project-title">BSD Game</h3>
+          <a href="https://app.bsd.education/sandbox/dt2rskqs/" class="project-link">View Project →</a>
         </article>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="copy">©2025 Sef Celis–Soto</p>
-    </footer>
+    <!-- QUOTE -->
+    <section class="quote-chaos">
+      <div class="quote-frame">
+        <div class="quote-lines">
+          <span class="quote-line"></span>
+          <span class="quote-icon">✰</span>
+          <span class="quote-line"></span>
+        </div>
+        <p class="quote-text">
+          "Wanting to be someone else is a waste of who you are.” - Kurt Cobain
+        </p>
+      </div>
+    </section>
 
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-logo-container">
+        <img
+          src="https://i.ibb.co/J4by1kh/Chat-GPT-Image-Dec-3-2025-12-41-30-PM.png"
+          class="footer-logo"
+          alt="Footer Logo"
+        >
+      </div>
+
+      <p class="copy">©2025 Sef Celis–Soto ⏾ We can be as we are.</p>
+
+      <nav class="footer-nav">
+        <a href="https://codepen.io/Sef-Celis-Soto/full/MYyEqGz" class="active-link">Home</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="https://codepen.io/Sef-Celis-Soto/full/ByKJVvV">About</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="https://codepen.io/Sef-Celis-Soto/full/LENmxYE">Portfolio</a>
+        <span class="divider-dot">✦︎</span>
+        <a href="https://codepen.io/Sef-Celis-Soto/full/OPNZWJg">Contact</a>
+      </nav>
+    </footer>
   </div>
 </body>
 </html>
